@@ -15,20 +15,21 @@ app.get('/status', function(req, res) {
 });
 
 app.post('/upload', function(req, res) {
-  res.send('file upload!');
-  // if (!req.files)
-  //   return res.status(400).send('No files were uploaded.');
-  //
-  // let sampleFile = req.files.sampleFile;
-  // console.log('uploading ' + sampleFile.name);
-  //
-  // // Use the mv() method to place the file somewhere on your server
-  // sampleFile.mv( + sampleFile.name, function(err) {
-  //   if (err)
-  //     return res.status(500).send(err);
-  //
-  //   res.send('File uploaded!');
-  // });
+  if (!req.files) {
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  let sampleFile = req.files.sampleFile;
+  console.log('uploading ' + sampleFile.name);
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(__dirname + '/../data/' + sampleFile.name, function(err) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    res.send('File uploaded!');
+  });
+  console.log('file uploaded!');
 });
 
 app.listen(process.env.PORT || 8081);
