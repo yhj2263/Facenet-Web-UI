@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Upload File</h1>
-
     <input
     ref="fileInput"
     type="file"

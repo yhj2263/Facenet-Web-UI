@@ -1,23 +1,32 @@
 <template>
-  <div id="app">
-    <img src="./assets/mylogo.png" width="200" height="157">
-    <router-view></router-view>
-  </div>
+  <v-app dark>
+    <v-toolbar>
+      <v-toolbar-title>Facenet</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat @click='home'>
+          <v-icon left class="blue--text text--darken-2">home</v-icon>
+          Home
+        </v-btn>
+        <v-btn flat>Link Two</v-btn>
+        <v-btn flat>Link Three</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+</v-app>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  data () {
+  },
+  methods: {
+    home () {
+      this.$router.push('home')
+    }
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
