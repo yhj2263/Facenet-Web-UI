@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+const exec = require('child_process').exec;
 
 const app = express();
 
@@ -35,10 +36,27 @@ app.post('/upload', function(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
-
-    res.send('File uploaded!');
   });
+
   console.log('file uploaded!');
+  res.send('file uploaded!');
+
+  // TODO: The unziped file may contain dummy files, figure out a way to remove
+  // Unzip the uploaded file
+  console.log('unziping file');
+  const childUnzip = exec('unzip ' + __dirname + '/../data/' + sampleFile.name +
+  ' -d ' + __dirname + '/../data/train_data',
+  function(error, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+    }
+  });
+
+  // Used to get rid of the warning
+  if (!childUnzip) {}
+  console.log('file unziped!');
 });
 
 // The server is running on port 8081

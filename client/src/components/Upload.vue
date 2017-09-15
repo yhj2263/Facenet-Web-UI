@@ -5,6 +5,7 @@
     <input
     ref="fileInput"
     type="file"
+    accept=".zip"
     name="sampleFile" />
     <button
     @click="upload">
