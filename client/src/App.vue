@@ -1,32 +1,41 @@
 <template>
   <v-app dark>
+
     <v-toolbar>
+      <a href="https://github.com/yhj2263/Facenet-Web-UI">
+        <img src = "./assets/mylogo.png" width = 65 height = 48/>
+      </a>
       <v-toolbar-title>Facenet</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat @click='home'>
           <v-icon left class="blue--text text--darken-2">home</v-icon>
           Home
         </v-btn>
-        <v-btn flat>Link Two</v-btn>
-        <v-btn flat>Link Three</v-btn>
+        <!-- <v-btn flat>Link Two</v-btn>
+        <v-btn flat>Link Three</v-btn> -->
       </v-toolbar-items>
     </v-toolbar>
+
+    <router-view></router-view>
 </v-app>
 </template>
 
 <script>
 export default {
   data () {
+    return {
+      e2: 3
+    }
   },
   methods: {
     home () {
-      this.$router.push('home')
+      this.$router.push('/')
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>
