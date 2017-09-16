@@ -27,9 +27,13 @@
         style="display: none"
         ref="fileInput"
         @change="onFilePicked"/>
-        <p>
+
+      <v-flex xs6 sm2 offset-sm5>
+        <p ref="fileName">
           {{fileName}}
         </p>
+      </v-flex>
+
       </v-flex>
       <v-flex xs12 sm12 class="text-sm-center">
         <v-btn
@@ -104,6 +108,7 @@ export default {
     onFilePicked (e) {
       const files = e.target.files
       this.filename = files[0].name
+      this.$refs.fileName.textContent = files[0].name
     },
     train () {
       trainClassifier.train({

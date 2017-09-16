@@ -27,6 +27,9 @@
         style="display: none"
         ref="fileInput"
         @change="onFilePicked"/>
+        <p>
+          {{fileName}}
+        </p>
       </v-flex>
       <v-flex xs12 sm12 class="text-sm-center">
         <v-btn
