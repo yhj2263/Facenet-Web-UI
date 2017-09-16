@@ -59,5 +59,16 @@ app.post('/upload', function(req, res) {
   console.log('file unziped!');
 });
 
+// Used for handling post request to start training classifier
+app.post('/start_train', function(req, res) {
+  // Error 400 if the file is missing
+  if (!req.body) {
+    return res.status(400).send('No files were uploaded.');
+  }
+  console.log('file uploaded!');
+  res.send(req.body.msg + ' recieved!');
+  console.log(req.body);
+});
+
 // The server is running on port 8081
 app.listen(process.env.PORT || 8081);

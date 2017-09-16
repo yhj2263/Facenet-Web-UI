@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Upload from '@/components/Upload'
-import TestUI from '@/components/TestUI'
+import Classify from '@/components/Classify'
 
 Vue.use(Router)
 
@@ -24,9 +24,9 @@ export default new Router({
       component: Upload
     },
     {
-      path: '/TestUI',
-      name: 'TestUI',
-      component: TestUI
+      path: '/classify',
+      name: 'classify',
+      component: Classify
     }
   ]
 })

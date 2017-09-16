@@ -5,7 +5,7 @@
         <v-btn large router to="/upload" class="blue">Train</v-btn>
       </v-flex>
       <v-flex xs12 sm6>
-        <v-btn large router to="TestUI" class="error">Classify</v-btn>
+        <v-btn large router to="/classify" class="error">Classify</v-btn>
       </v-flex>
     </v-layout>
   </v-container>

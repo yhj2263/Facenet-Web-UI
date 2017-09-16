@@ -27,9 +27,6 @@
         style="display: none"
         ref="fileInput"
         @change="onFilePicked"/>
-        <p>
-          {{fileName}}
-        </p>
       </v-flex>
       <v-flex xs12 sm12 class="text-sm-center">
         <v-btn
@@ -38,15 +35,6 @@
         Upload
         <v-icon right dark>cloud_upload</v-icon>
         </v-btn>
-      </v-flex>
-      <v-flex xs12 sm4 offset-sm4 mb-3 mt-3 class="text-sm-right">
-        <v-text-field
-          name="input-1"
-          label="Name"
-          placeholder="Enter a name for your classifier"
-          dark
-          prepend-icon="keyboard_arrow_right"
-        ></v-text-field>
       </v-flex>
 
       <v-flex xs12 sm4 offset-sm4 mb-4 class="text-sm-right">
@@ -66,7 +54,7 @@
         large
         class="green"
         @click="train">
-        Start Training
+        Classify
         </v-btn>
       </v-flex>
 
@@ -76,7 +64,6 @@
 
 <script>
 import uploadFile from '@/services/uploadFile.js'
-import trainClassifier from '@/services/Train.js'
 export default {
   data () {
     return {
@@ -104,12 +91,6 @@ export default {
     onFilePicked (e) {
       const files = e.target.files
       this.filename = files[0].name
-    },
-    train () {
-      trainClassifier.train({
-        name: 'testfile',
-        msg: 'test message from front end'
-      })
     }
   }
 }
