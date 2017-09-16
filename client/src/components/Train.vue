@@ -1,15 +1,4 @@
 <template>
-  <!-- <div>
-    <h1>Upload File</h1>
-    <input
-    ref="fileInput"
-    type="file"
-    accept=".zip"
-    name="sampleFile" />
-    <button
-    @click="upload">
-    upload</button>
-  </div> -->
   <v-container>
     <v-layout column warp>
       <v-flex xs12 sm12 mt-5 class="text-sm-center">
@@ -28,12 +17,11 @@
         ref="fileInput"
         @change="onFilePicked"/>
 
-      <v-flex xs6 sm2 offset-sm5>
-        <p ref="fileName">
-          {{fileName}}
-        </p>
-      </v-flex>
-
+        <v-flex xs6 sm2 offset-sm5>
+          <p ref="fileName">
+            {{fileName}}
+          </p>
+        </v-flex>
       </v-flex>
       <v-flex xs12 sm12 class="text-sm-center">
         <v-btn
@@ -55,7 +43,7 @@
 
       <v-flex xs12 sm4 offset-sm4 mb-4 class="text-sm-right">
         <v-select
-          v-bind:items="states"
+          v-bind:items="modelIndex"
           v-model="e1"
           label="Select a model"
           single-line
@@ -81,14 +69,16 @@
 <script>
 import uploadFile from '@/services/uploadFile.js'
 import trainClassifier from '@/services/Train.js'
+import indexService from '@/services/IndexService.js'
+
 export default {
   data () {
     return {
       fileName: '',
       classifierName: 'test_classifier',
       e1: null,
-      states: [
-        'modle1', 'modle2', 'modle3'
+      modelIndex: [
+        'No model Avaliable'
       ]
     }
   },
@@ -100,7 +90,7 @@ export default {
       console.log('button clicked')
       console.log('selected file is ' + files[0].name)
       formData.append('sampleFile', files[0])
-      uploadFile.upload(formData)
+      uploadFile.upload_train(formData)
     },
     onPickFile () {
       this.$refs.fileInput.click()
@@ -116,6 +106,9 @@ export default {
         msg: 'test message from front end'
       })
     }
+  },
+  mounted () {
+    this.modelIndex = indexService.modelIndex()
   }
 }
 </script>

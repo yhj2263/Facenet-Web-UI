@@ -27,9 +27,13 @@
         style="display: none"
         ref="fileInput"
         @change="onFilePicked"/>
-        <p>
-          {{fileName}}
-        </p>
+
+        <v-flex xs6 sm2 offset-sm5>
+          <p ref="fileName">
+            {{fileName}}
+          </p>
+        </v-flex>
+
       </v-flex>
       <v-flex xs12 sm12 class="text-sm-center">
         <v-btn
@@ -56,7 +60,7 @@
         <v-btn
         large
         class="green"
-        @click="train">
+        @click="classify">
         Classify
         </v-btn>
       </v-flex>
@@ -86,7 +90,7 @@ export default {
       console.log('button clicked')
       console.log('selected file is ' + files[0].name)
       formData.append('sampleFile', files[0])
-      uploadFile.upload(formData)
+      uploadFile.upload_test(formData)
     },
     onPickFile () {
       this.$refs.fileInput.click()
@@ -94,6 +98,9 @@ export default {
     onFilePicked (e) {
       const files = e.target.files
       this.filename = files[0].name
+      this.$refs.fileName.textContent = files[0].name
+    },
+    classify () {
     }
   }
 }

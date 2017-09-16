@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
-import Upload from '@/components/Upload'
+import Train from '@/components/Train'
 import Classify from '@/components/Classify'
 
 Vue.use(Router)
@@ -19,9 +19,9 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/upload',
-      name: 'upload',
-      component: Upload
+      path: '/train',
+      name: 'train',
+      component: Train
     },
     {
       path: '/classify',

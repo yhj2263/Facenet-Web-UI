@@ -1,7 +1,10 @@
 import Api from '@/services/Api'
 
 export default {
-  upload (file) {
-    return Api().post('upload', file)
+  upload_train (file) {
+    return Api().post('upload_train', file)
+  },
+  upload_test (file) {
+    return Api().post('upload_test', file)
   }
 }

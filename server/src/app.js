@@ -21,7 +21,7 @@ app.get('/status', function(req, res) {
 });
 
 // Used for handling post request to upload file
-app.post('/upload', function(req, res) {
+app.post('/upload_train', function(req, res) {
   // Error 400 if the file is missing
   if (!req.files) {
     return res.status(400).send('No files were uploaded.');
@@ -46,6 +46,45 @@ app.post('/upload', function(req, res) {
   console.log('unziping file');
   const childUnzip = exec('unzip ' + __dirname + '/../data/' + sampleFile.name +
   ' -d ' + __dirname + '/../data/train_data',
+  function(error, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+    }
+  });
+
+  // Used to get rid of the warning
+  if (!childUnzip) {}
+  console.log('file unziped!');
+});
+
+// Used for handling post request to upload file
+app.post('/upload_test', function(req, res) {
+  // Error 400 if the file is missing
+  if (!req.files) {
+    return res.status(400).send('No files were uploaded.');
+  }
+
+  // Read the file from the post request
+  let sampleFile = req.files.sampleFile;
+  console.log('uploading ' + sampleFile.name);
+  // Use the mv() method to place the uploaded file to the data directory
+  sampleFile.mv(__dirname + '/../data/' + sampleFile.name, function(err) {
+    // Error 500 if the mv() method fails
+    if (err) {
+      return res.status(500).send(err);
+    }
+  });
+
+  console.log('file uploaded!');
+  res.send('file uploaded!');
+
+  // TODO: The unziped file may contain dummy files, figure out a way to remove
+  // Unzip the uploaded file
+  console.log('unziping file');
+  const childUnzip = exec('unzip ' + __dirname + '/../data/' + sampleFile.name +
+  ' -d ' + __dirname + '/../data/test_data',
   function(error, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);

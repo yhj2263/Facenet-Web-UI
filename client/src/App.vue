@@ -1,6 +1,5 @@
 <template>
   <v-app dark>
-
     <v-toolbar>
       <a href="https://github.com/yhj2263/Facenet-Web-UI">
         <img src = "./assets/mylogo.png" width = 65 height = 48/>
@@ -16,8 +15,9 @@
         <v-btn flat>Link Three</v-btn> -->
       </v-toolbar-items>
     </v-toolbar>
-
-    <router-view></router-view>
+    <main>
+      <router-view></router-view>
+    </main>
 </v-app>
 </template>
 
