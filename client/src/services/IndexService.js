@@ -2,7 +2,7 @@ import Api from '@/services/Api'
 
 export default {
   modelIndex () {
-    return Api().get('models')
+    return Api().get('model')
     // return ['model1', 'model2']
   }
 }

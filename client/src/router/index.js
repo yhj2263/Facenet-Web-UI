@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Train from '@/components/Train'
 import Classify from '@/components/Classify'
+import TestUI from '@/components/TestUI'
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/classify',
       name: 'classify',
       component: Classify
+    },
+    {
+      path: '/testUI',
+      name: 'testUI',
+      component: TestUI
     }
   ]
 })

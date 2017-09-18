@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const exec = require('child_process').exec;
+const modelIndex = require('../data/model/index.json');
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(fileUpload());
 app.use(cors());
 
 console.log('node is running!');
+
+// TODO: refactor this into different services
 
 // Used for checking the working status of the server
 app.get('/status', function(req, res) {
@@ -107,6 +110,10 @@ app.post('/start_train', function(req, res) {
   console.log('file uploaded!');
   res.send(req.body.msg + ' recieved!');
   console.log(req.body);
+});
+
+app.get('/model', function(req, res) {
+  res.json(modelIndex);
 });
 
 // The server is running on port 8081
