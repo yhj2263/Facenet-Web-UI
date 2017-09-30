@@ -49,8 +49,7 @@
         <v-btn
         large
         class="green"
-        @click="classify"
-        router to="/results">
+        @click="classify">
         Classify
         </v-btn>
       </v-flex>
@@ -62,13 +61,15 @@
 <script>
 import uploadFile from '@/services/uploadFile.js'
 import indexService from '@/services/IndexService.js'
+import Classifier from '@/services/Classify.js'
 
 export default {
   data () {
     return {
       fileName: '',
       modelArray: null,
-      classifierName: 'test_classifier',
+      modelName: '20170512-110547',
+      classifierName: 'testClassifier1',
       e1: null,
       classifierNames: [
       ]
@@ -93,6 +94,12 @@ export default {
       this.$refs.fileName.textContent = files[0].name
     },
     classify () {
+      console.log(this.classifierName)
+      Classifier.start({
+        modelName: this.modelName,
+        classifierName: this.classifierName,
+        msg: 'test message from front end'
+      })
     }
   },
   async mounted () {
