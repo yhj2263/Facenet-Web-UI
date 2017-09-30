@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import Train from '@/components/Train'
 import Classify from '@/components/Classify'
 import TestUI from '@/components/TestUI'
+import Results from '@/components/Results'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/testUI',
       name: 'testUI',
       component: TestUI
+    },
+    {
+      path: '/results',
+      name: 'results',
+      component: Results
     }
   ]
 })

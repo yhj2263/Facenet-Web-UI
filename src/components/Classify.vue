@@ -1,15 +1,4 @@
 <template>
-  <!-- <div>
-    <h1>Upload File</h1>
-    <input
-    ref="fileInput"
-    type="file"
-    accept=".zip"
-    name="sampleFile" />
-    <button
-    @click="upload">
-    upload</button>
-  </div> -->
   <v-container>
     <v-layout column warp>
       <v-flex xs12 sm12 mt-5 class="text-sm-center">
@@ -46,9 +35,9 @@
 
       <v-flex xs12 sm4 offset-sm4 mb-4 class="text-sm-right">
         <v-select
-          v-bind:items="states"
+          v-bind:items="classifierNames"
           v-model="e1"
-          label="Select a model"
+          label="Select a classifier"
           single-line
           auto
           prepend-icon="list"
@@ -60,7 +49,8 @@
         <v-btn
         large
         class="green"
-        @click="classify">
+        @click="classify"
+        router to="/results">
         Classify
         </v-btn>
       </v-flex>
@@ -71,14 +61,16 @@
 
 <script>
 import uploadFile from '@/services/uploadFile.js'
+import indexService from '@/services/IndexService.js'
+
 export default {
   data () {
     return {
       fileName: '',
+      modelArray: null,
       classifierName: 'test_classifier',
       e1: null,
-      states: [
-        'modle1', 'modle2', 'modle3'
+      classifierNames: [
       ]
     }
   },
@@ -102,6 +94,16 @@ export default {
     },
     classify () {
     }
+  },
+  async mounted () {
+    let classifierJson = await indexService.classifierIndex()
+    // console.log(modelJson)
+    this.modelArray = classifierJson.data
+    var classifierNames = []
+    this.modelArray.forEach(function (item, index, array) {
+      classifierNames.push(item.name)
+    })
+    this.classifierNames = classifierNames
   }
 }
 </script>

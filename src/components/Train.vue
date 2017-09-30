@@ -98,6 +98,7 @@ export default {
   data () {
     return {
       fileName: '',
+      modelSelected: null,
       modelArray: null,
       classifierName: '',
       modelNames: [
@@ -144,6 +145,7 @@ export default {
           trainSet = item.trainSet
         }
       })
+      this.modelSelected = e
       this.accuracy = accuracy
       this.trainSet = trainSet
       this.$refs.modelTable.style = 'display:on'
@@ -151,7 +153,8 @@ export default {
     train () {
       console.log(this.classifierName)
       trainClassifier.train({
-        name: this.classifierName,
+        modelName: this.modelSelected,
+        classifierName: this.classifierName,
         msg: 'test message from front end'
       })
     }

@@ -4,6 +4,9 @@ export default {
   modelIndex () {
     return Api().get('model')
     // return ['model1', 'model2']
+  },
+  classifierIndex () {
+    return Api().get('classifier')
   }
 }
 
