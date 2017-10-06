@@ -51,7 +51,7 @@ import indexService from '@/services/IndexService.js'
 export default {
   data () {
     return {
-      classifyResult: 'empty',
+      classifyResult: 'empty'
     }
   },
   methods: {
