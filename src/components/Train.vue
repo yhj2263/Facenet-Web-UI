@@ -28,7 +28,10 @@
       <v-flex xs12 sm12 class="text-sm-center">
         <v-btn
         @click="upload"
-        class="blue-grey white--text">
+        class="blue-grey white--text"
+        :loading="loading"
+        :disabled="loading"
+        >
         Upload
         <v-icon right dark>cloud_upload</v-icon>
         </v-btn>
@@ -81,7 +84,10 @@
         <v-btn
         large
         class="green"
-        @click="train">
+        @click="train"
+        :loading='training'
+        id='train_button'
+      >
         Start Training
         </v-btn>
       </v-flex>
@@ -97,6 +103,8 @@ import indexService from '@/services/IndexService.js'
 export default {
   data () {
     return {
+      loading: false,
+      training: false,
       fileName: '',
       modelSelected: null,
       modelArray: null,
@@ -119,13 +127,16 @@ export default {
   },
   methods: {
     // used to upload file to the server
-    upload (e) {
+    async upload (e) {
+      this.loading = true
       let files = this.$refs.fileInput.files
       let formData = new FormData()
       console.log('button clicked')
       console.log('selected file is ' + files[0].name)
       formData.append('sampleFile', files[0])
-      uploadFile.upload_train(formData)
+      let x = await uploadFile.upload_train(formData)
+      console.log(x)
+      this.loading = false
     },
     onPickFile () {
       this.$refs.fileInput.click()
@@ -150,13 +161,17 @@ export default {
       this.trainSet = trainSet
       this.$refs.modelTable.style = 'display:on'
     },
-    train () {
+    async train () {
+      this.training = true
       console.log(this.classifierName)
-      trainClassifier.train({
+      let x = await trainClassifier.train({
         modelName: this.modelSelected,
         classifierName: this.classifierName,
         msg: 'test message from front end'
       })
+      console.log(x)
+      this.training = false
+      console.log(this.training)
     }
   },
   async mounted () {

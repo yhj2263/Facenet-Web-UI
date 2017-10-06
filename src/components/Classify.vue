@@ -27,7 +27,9 @@
       <v-flex xs12 sm12 class="text-sm-center">
         <v-btn
         @click="upload"
-        class="blue-grey white--text">
+        class="blue-grey white--text"
+        :loading="loading"
+        >
         Upload
         <v-icon right dark>cloud_upload</v-icon>
         </v-btn>
@@ -42,6 +44,7 @@
           auto
           prepend-icon="list"
           hide-details
+          @change="onSelected"
         ></v-select>
       </v-flex>
 
@@ -49,6 +52,7 @@
         <v-btn
         large
         class="green"
+        :loading="classifying"
         @click="classify">
         Classify
         </v-btn>
@@ -66,6 +70,8 @@ import Classifier from '@/services/Classify.js'
 export default {
   data () {
     return {
+      loading: false,
+      classifying: false,
       fileName: '',
       modelArray: null,
       modelName: '20170512-110547',
@@ -77,13 +83,16 @@ export default {
   },
   methods: {
     // used to upload file to the server
-    upload (e) {
+    async upload (e) {
+      this.loading = true
       let files = this.$refs.fileInput.files
       let formData = new FormData()
       console.log('button clicked')
       console.log('selected file is ' + files[0].name)
       formData.append('sampleFile', files[0])
-      uploadFile.upload_test(formData)
+      let x = await uploadFile.upload_test(formData)
+      console.log(x)
+      this.loading = false
     },
     onPickFile () {
       this.$refs.fileInput.click()
@@ -93,13 +102,20 @@ export default {
       this.filename = files[0].name
       this.$refs.fileName.textContent = files[0].name
     },
-    classify () {
+    onSelected (e) {
+      this.classifierName = e
+    },
+    async classify () {
+      this.classifying = true
       console.log(this.classifierName)
-      Classifier.start({
+      let x = await Classifier.start({
         modelName: this.modelName,
         classifierName: this.classifierName,
         msg: 'test message from front end'
       })
+      console.log(x)
+      this.classifying = false
+      this.$router.push('/results')
     }
   },
   async mounted () {

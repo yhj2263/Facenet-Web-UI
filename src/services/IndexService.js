@@ -7,6 +7,9 @@ export default {
   },
   classifierIndex () {
     return Api().get('classifier')
+  },
+  classifyResult () {
+    return Api().get('classify_result')
   }
 }
 
