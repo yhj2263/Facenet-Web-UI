@@ -5,7 +5,6 @@ export default function () {
   console.log(port)
   return axios.create({
     // baseURL: 'http://54.237.168.141:8081'
-    // baseURL: 'http://localhost:8081'
-    baseURL: port
+    baseURL: 'http://localhost:8081'
   })
 }

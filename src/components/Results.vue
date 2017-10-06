@@ -52,7 +52,6 @@ export default {
   data () {
     return {
       classifyResult: 'empty',
-      url: 'http://localhost:8081/no_label/01.jpg'
     }
   },
   methods: {
